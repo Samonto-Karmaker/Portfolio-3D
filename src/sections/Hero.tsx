@@ -1,3 +1,4 @@
+import Button_CTA from "../components/Button_CTA"
 import { intro, words } from "../consts/constant"
 
 const Hero = () => {
@@ -19,8 +20,15 @@ const Hero = () => {
                                 <span className="slide">
                                     <span className="wrapper">
                                         {loopWords.map((word, index) => (
-                                            <span key={index} className="flex items-center md:gap-3 gap-1 pb-2">
-                                                <img src={word.imgPath} alt={word.text} className="xl:size-12 md:size-10 size-7 md:p-2 p-1 rounded-full bg-white-50" />
+                                            <span
+                                                key={index}
+                                                className="flex items-center md:gap-3 gap-1 pb-2"
+                                            >
+                                                <img
+                                                    src={word.imgPath}
+                                                    alt={word.text}
+                                                    className="xl:size-12 md:size-10 size-7 md:p-2 p-1 rounded-full bg-white-50"
+                                                />
                                                 <span>{word.text}</span>
                                             </span>
                                         ))}
@@ -31,6 +39,7 @@ const Hero = () => {
                             <h1>that Deliver Results</h1>
                         </div>
                         <p>{intro}</p>
+                        <Button_CTA text="See My Work" className="md:w-80 md:h-16 w-60 h-12" />
                     </div>
                 </header>
                 {/* Right: 3D model */}
