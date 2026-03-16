@@ -1,4 +1,4 @@
-import Button_CTA from "../components/Button_CTA"
+import ButtonCTA from "../components/ButtonCTA.tsx"
 import HeroExperience from "../components/models/HeroExperience"
 import { intro, words } from "../consts/constant"
 
@@ -40,7 +40,7 @@ const Hero = () => {
                             <h1>that Deliver Results</h1>
                         </div>
                         <p className="max-w-2xl">{intro}</p>
-                        <Button_CTA
+                        <ButtonCTA
                             text="See My Work"
                             className="md:w-80 md:h-16 w-60 h-12"
                         />

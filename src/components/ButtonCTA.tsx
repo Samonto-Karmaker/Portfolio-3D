@@ -1,12 +1,12 @@
 import type { JSX } from "react"
 
-const Button_CTA = ({
+const ButtonCTA = ({
     text,
     className,
 }: {
     text?: string
     className?: string
-    id?: string 
+    id?: string
 }): JSX.Element => {
     return (
         <div className={`${className ?? ""} cta-wrapper`}>
@@ -21,4 +21,4 @@ const Button_CTA = ({
     )
 }
 
-export default Button_CTA
+export default ButtonCTA
