@@ -1,18 +1,19 @@
 import Button_CTA from "../components/Button_CTA"
+import HeroExperience from "../components/models/HeroExperience"
 import { intro, words } from "../consts/constant"
 
 const Hero = () => {
     const loopWords = [...words, ...words]
 
     return (
-        <section id="hero" className="relative overflow-hidden">
-            <div className="absolute top-0 left-0 z-10">
+        <section id="hero" className="relative overflow-hidden min-h-screen">
+            <div className="absolute top-0 left-0 z-0 pointer-events-none">
                 <img src="/images/bg.png" alt="Background" />
             </div>
 
             <div className="hero-layout">
                 {/* Left: hero content */}
-                <header className="flex flex-col justify-center md:w-full w-screen md:px-20 px-5">
+                <header className="w-full xl:w-1/2 flex flex-col justify-center z-20">
                     <div className="flex flex-col gap-7">
                         <div className="hero-text">
                             <h1>
@@ -38,11 +39,19 @@ const Hero = () => {
                             <h1>into Real Projects</h1>
                             <h1>that Deliver Results</h1>
                         </div>
-                        <p>{intro}</p>
-                        <Button_CTA text="See My Work" className="md:w-80 md:h-16 w-60 h-12" />
+                        <p className="max-w-2xl">{intro}</p>
+                        <Button_CTA
+                            text="See My Work"
+                            className="md:w-80 md:h-16 w-60 h-12"
+                        />
                     </div>
                 </header>
                 {/* Right: 3D model */}
+                <figure className="w-full xl:w-1/2 flex justify-center xl:justify-end">
+                    <div className="hero-3d-layout">
+                        <HeroExperience />
+                    </div>
+                </figure>
             </div>
         </section>
     )
