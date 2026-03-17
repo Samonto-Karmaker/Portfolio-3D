@@ -8,10 +8,10 @@ import Particles from "./Particle"
 import { Suspense } from "react"
 
 const HeroExperience = () => {
-    const isMobile = useMediaQuery({ query: "(max-width: 768px)" })
+    const isMobile = useMediaQuery({ query: "(max-width: 425px)" })
     const isTablet = useMediaQuery({ query: "(max-width: 1024px)" })
-    const roomScale = isMobile ? 0.7 : isTablet ? 0.88 : 1.05
-    const roomPositionY = isMobile ? -3 : isTablet ? -3.25 : -3.45
+    // const roomScale = isMobile ? 0.7 : isTablet ? 0.88 : 1.05
+    // const roomPositionY = isMobile ? -3 : isTablet ? -2.75 : -2.5
 
     return (
         <Canvas
@@ -24,9 +24,9 @@ const HeroExperience = () => {
             {/* Configure OrbitControls to disable panning and control zoom based on device type */}
             <OrbitControls
                 enablePan={false} // Prevents panning of the scene
-                enableZoom // Keeps zoom available on all devices
+                enableZoom={!isTablet} // Keeps zoom available on all devices
                 zoomSpeed={0.65}
-                maxDistance={16} // Prevents zooming out so far that layout feels empty
+                maxDistance={20} // Prevents zooming out so far that layout feels empty
                 minDistance={10} // Prevents clipping from excessive zoom in
                 minPolarAngle={Math.PI / 5} // Minimum angle for vertical rotation
                 maxPolarAngle={Math.PI / 2} // Maximum angle for vertical rotation
@@ -36,8 +36,8 @@ const HeroExperience = () => {
                 <HeroLights />
                 <Particles count={100} />
                 <group
-                    scale={roomScale}
-                    position={[0, roomPositionY, 0]}
+                    scale={isMobile ? 0.7 : 1}
+                    position={[0, -3.5, 0]}
                     rotation={[0, -Math.PI / 4, 0]}
                 >
                     <Room />

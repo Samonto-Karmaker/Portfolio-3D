@@ -19,7 +19,7 @@ const navLinks = [
 
 const words = [
     { text: "Ideas", imgPath: "/images/ideas.svg" },
-    { text: "Concepts", imgPath: "/images/concepts.svg" },
+    { text: "Drafts", imgPath: "/images/concepts.svg" },
     { text: "Designs", imgPath: "/images/designs.svg" },
     { text: "Code", imgPath: "/images/code.svg" },
 ]
@@ -253,8 +253,7 @@ const socialImgs = [
     },
 ]
 
-const intro = "Hi, I'm Adrian, a passionate web developer with a keen eye for detail and a commitment to creating exceptional digital experiences."
-
+const intro = "Hi, I'm Sam, a software engineer with a passion for creating innovative solutions."
 export {
     words,
     abilities,
