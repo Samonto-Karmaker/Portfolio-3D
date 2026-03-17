@@ -2,8 +2,30 @@ import ButtonCTA from "../components/ButtonCTA.tsx"
 import HeroExperience from "../components/models/HeroExperience"
 import { intro, words } from "../consts/constant"
 
+import { useGSAP } from "@gsap/react"
+import gsap from "gsap"
+
 const Hero = () => {
     const loopWords = [...words, ...words]
+
+    useGSAP(() => {
+        gsap.fromTo(
+            ".hero-text h1", // select the h1 elements within the hero-text container
+            {
+                // from
+                y: 50,
+                opacity: 0,
+            },
+            {
+                // to
+                y: 0,
+                opacity: 1,
+                stagger: 0.5, // give each h1 element a staggered animation
+                duration: 1.5,
+                ease: "power2.inOut", // the easing function
+            },
+        )
+    })
 
     return (
         <section id="hero" className="relative overflow-visible">
