@@ -1,3 +1,4 @@
+import AnimatedCounter from "../components/AnimatedCounter.tsx"
 import ButtonCTA from "../components/ButtonCTA.tsx"
 import HeroExperience from "../components/models/HeroExperience"
 import { intro, words } from "../consts/constant"
@@ -81,6 +82,7 @@ const Hero = () => {
                     </div>
                 </figure>
             </div>
+            <AnimatedCounter />
         </section>
     )
 }
