@@ -253,7 +253,45 @@ const socialImgs = [
     },
 ]
 
-const intro = "Hi, I'm Sam, a software engineer with a passion for creating innovative solutions."
+const showcaseProjects = [
+    {
+        id: "ryde",
+        title: "On-Demand Rides Made Simple with a Powerful, User-Friendly App called Ryde",
+        description:
+            "An app built with React Native, Expo, & TailwindCSS for a fast, user-friendly experience.",
+        imgPath: "/images/project1.png",
+        imgAlt: "Ryde App Interface",
+        imageBackground: "#101218",
+        imageScale: 1,
+        cardScale: 1,
+        isFeatured: true,
+    },
+    {
+        id: "library-platform",
+        title: "The Library Management Platform",
+        description:
+            "A complete library workflow system for managing books, memberships, and borrowing operations.",
+        imgPath: "/images/project2.png",
+        imgAlt: "Library Management Platform",
+        imageBackground: "#FFEFDB",
+        imageScale: 1,
+        cardScaleRange: [0.97, 1.03],
+    },
+    {
+        id: "yc-directory",
+        title: "YC Directory - A Startup Showcase App",
+        description:
+            "A discovery platform for startup profiles, founder stories, and curated ecosystem insights.",
+        imgPath: "/images/project3.png",
+        imgAlt: "YC Directory App",
+        imageBackground: "#FFE7EB",
+        imageScale: 1,
+        cardScaleRange: [0.95, 1.02],
+    },
+]
+
+const intro =
+    "Hi, I'm Sam, a software engineer with a passion for creating innovative solutions."
 export {
     words,
     abilities,
@@ -266,5 +304,6 @@ export {
     techStackIcons,
     techStackImgs,
     navLinks,
-    intro
+    intro,
+    showcaseProjects,
 }

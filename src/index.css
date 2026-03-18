@@ -157,13 +157,50 @@ section {
 
     .app-showcase {
         @apply w-full mt-20 px-5 md:px-20 py-10 md:py-20 flex items-center justify-center;
+        --showcase-gap: 2.5rem;
+        position: relative;
+        overflow: hidden;
+        isolation: isolate;
+
+        &::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(
+                    to bottom,
+                    #000 0%,
+                    rgba(0, 0, 0, 0) 18%,
+                    rgba(0, 0, 0, 0) 82%,
+                    #000 100%
+                ),
+                linear-gradient(
+                    to right,
+                    #000 0%,
+                    rgba(0, 0, 0, 0) 14%,
+                    rgba(0, 0, 0, 0) 86%,
+                    #000 100%
+                ),
+                url("/images/zigzag-lines-pattern-black-background.avif");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.33;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        > .w-full {
+            position: relative;
+            z-index: 1;
+        }
 
         .showcaselayout {
-            @apply flex xl:flex-row flex-col gap-10 justify-between;
+            @apply w-full;
         }
 
         .first-project-wrapper {
-            @apply h-full flex flex-col justify-between xl:w-[60%];
+            @apply h-full flex flex-col justify-between w-full;
 
             .image-wrapper {
                 @apply xl:h-[70vh] md:h-[50vh] h-96 relative;
@@ -186,11 +223,43 @@ section {
             }
         }
 
-        .project-list-wrapper {
-            @apply flex md:flex-row flex-col xl:flex-col gap-10 xl:w-[40%];
+        .featured-project-card {
+            margin-bottom: var(--showcase-gap);
+        }
+
+        .project-masonry {
+            column-gap: var(--showcase-gap);
+            column-count: 1;
+
+            @media (min-width: 768px) {
+                column-count: 2;
+            }
+
+            @media (min-width: 1280px) {
+                column-count: 3;
+            }
+
+            .masonry-project-card {
+                margin-bottom: var(--showcase-gap);
+                break-inside: avoid;
+                page-break-inside: avoid;
+                -webkit-column-break-inside: avoid;
+            }
+
+            .masonry-card-compact .image-wrapper {
+                @apply xl:h-52 md:h-52 h-56;
+            }
+
+            .masonry-card-medium .image-wrapper {
+                @apply xl:h-64 md:h-60 h-64;
+            }
+
+            .masonry-card-tall .image-wrapper {
+                @apply xl:h-80 md:h-72 h-72;
+            }
 
             .image-wrapper {
-                @apply xl:h-[37vh] md:h-52 lg:h-72 h-64 relative rounded-xl xl:px-5 2xl:px-12 py-0;
+                @apply relative rounded-xl xl:px-5 2xl:px-12 py-0;
             }
 
             img {
@@ -199,6 +268,26 @@ section {
 
             h2 {
                 @apply text-lg md:text-xl lg:text-2xl font-semibold mt-5;
+            }
+
+            p {
+                @apply text-base md:text-lg;
+            }
+        }
+
+        .scalable-card {
+            transform: scale(var(--card-scale, 1));
+            transform-origin: center;
+            will-change: transform;
+        }
+
+        .scalable-image-wrapper {
+            @apply flex items-center justify-center overflow-hidden;
+
+            img {
+                width: calc(var(--image-scale, 0.9) * 100%);
+                height: calc(var(--image-scale, 0.9) * 100%);
+                @apply object-contain rounded-xl;
             }
         }
     }
