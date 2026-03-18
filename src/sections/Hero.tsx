@@ -1,32 +1,38 @@
 import AnimatedCounter from "../components/AnimatedCounter.tsx"
 import ButtonCTA from "../components/ButtonCTA.tsx"
 import HeroExperience from "../components/models/HeroExperience"
+import ModelZoomHint from "../components/ModelZoomHint.tsx"
 import { intro, words } from "../consts/constant"
 
 import { useGSAP } from "@gsap/react"
 import gsap from "gsap"
+import { useRef } from "react"
 
 const Hero = () => {
     const loopWords = [...words, ...words]
+    const modelContainerRef = useRef<HTMLDivElement | null>(null)
 
-    useGSAP(() => {
-        gsap.fromTo(
-            ".hero-text h1", // select the h1 elements within the hero-text container
-            {
-                // from
-                y: 50,
-                opacity: 0,
-            },
-            {
-                // to
-                y: 0,
-                opacity: 1,
-                stagger: 0.5, // give each h1 element a staggered animation
-                duration: 1.5,
-                ease: "power2.inOut", // the easing function
-            },
-        )
-    })
+    useGSAP(
+        () => {
+            gsap.fromTo(
+                ".hero-text h1", // select the h1 elements within the hero-text container
+                {
+                    // from
+                    y: 50,
+                    opacity: 0,
+                },
+                {
+                    // to
+                    y: 0,
+                    opacity: 1,
+                    stagger: 0.5, // give each h1 element a staggered animation
+                    duration: 1.5,
+                    ease: "power2.inOut", // the easing function
+                },
+            )
+        },
+        { dependencies: [] },
+    )
 
     return (
         <section id="hero" className="relative overflow-visible">
@@ -77,8 +83,9 @@ const Hero = () => {
 
                 {/* RIGHT: 3D Model or Visual */}
                 <figure>
-                    <div className="hero-3d-layout">
+                    <div className="hero-3d-layout" ref={modelContainerRef}>
                         <HeroExperience />
+                        <ModelZoomHint targetRef={modelContainerRef} />
                     </div>
                 </figure>
             </div>

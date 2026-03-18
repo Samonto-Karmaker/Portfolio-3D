@@ -1,6 +1,8 @@
 import { OrbitControls } from "@react-three/drei"
 import { Canvas } from "@react-three/fiber"
 import { useMediaQuery } from "react-responsive"
+import { useEffect, useState } from "react"
+import { memo } from "react"
 
 import { Room } from "./Room.tsx"
 import HeroLights from "./HeroLights"
@@ -10,8 +12,37 @@ import { Suspense } from "react"
 const HeroExperience = () => {
     const isMobile = useMediaQuery({ query: "(max-width: 425px)" })
     const isTablet = useMediaQuery({ query: "(max-width: 1024px)" })
+    const [isZoomModifierPressed, setIsZoomModifierPressed] = useState(false)
     // const roomScale = isMobile ? 0.7 : isTablet ? 0.88 : 1.05
     // const roomPositionY = isMobile ? -3 : isTablet ? -2.75 : -2.5
+
+    useEffect(() => {
+        const handleKeyDown = (event: KeyboardEvent) => {
+            if (event.ctrlKey || event.metaKey) {
+                setIsZoomModifierPressed(true)
+            }
+        }
+
+        const handleKeyUp = (event: KeyboardEvent) => {
+            if (!event.ctrlKey && !event.metaKey) {
+                setIsZoomModifierPressed(false)
+            }
+        }
+
+        const handleWindowBlur = () => {
+            setIsZoomModifierPressed(false)
+        }
+
+        window.addEventListener("keydown", handleKeyDown)
+        window.addEventListener("keyup", handleKeyUp)
+        window.addEventListener("blur", handleWindowBlur)
+
+        return () => {
+            window.removeEventListener("keydown", handleKeyDown)
+            window.removeEventListener("keyup", handleKeyUp)
+            window.removeEventListener("blur", handleWindowBlur)
+        }
+    }, [])
 
     return (
         <Canvas
@@ -24,8 +55,11 @@ const HeroExperience = () => {
             {/* Configure OrbitControls to disable panning and control zoom based on device type */}
             <OrbitControls
                 enablePan={false} // Prevents panning of the scene
-                enableZoom={!isTablet} // Keeps zoom available on all devices
-                zoomSpeed={0.65}
+                // Keep page scrolling natural; zoom only when Ctrl/Cmd is held.
+                enableZoom={!isTablet && isZoomModifierPressed}
+                enableDamping
+                dampingFactor={0.08}
+                zoomSpeed={0.45}
                 maxDistance={20} // Prevents zooming out so far that layout feels empty
                 minDistance={10} // Prevents clipping from excessive zoom in
                 minPolarAngle={Math.PI / 5} // Minimum angle for vertical rotation
@@ -47,4 +81,4 @@ const HeroExperience = () => {
     )
 }
 
-export default HeroExperience
+export default memo(HeroExperience)
