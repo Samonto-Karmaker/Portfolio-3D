@@ -48,6 +48,8 @@ const HeroExperience = () => {
         <Canvas
             camera={{ position: [0, 0, 12.5], fov: 46 }}
             style={{ background: "#000000" }}
+            dpr={[1, 1.5]}
+            gl={{ powerPreference: "high-performance" }}
         >
             <color attach="background" args={["#000000"]} />
             {/* deep blue ambient */}
@@ -68,7 +70,7 @@ const HeroExperience = () => {
 
             <Suspense fallback={null}>
                 <HeroLights />
-                <Particles count={100} />
+                <Particles count={isMobile ? 40 : isTablet ? 70 : 100} />
                 <group
                     scale={isMobile ? 0.7 : 1}
                     position={[0, -3.5, 0]}

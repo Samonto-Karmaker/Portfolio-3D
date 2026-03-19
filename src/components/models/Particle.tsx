@@ -9,6 +9,8 @@ type ParticlesProps = {
 const Particles = ({ count = 200 }: ParticlesProps) => {
     const pointsRef = useRef<THREE.Points | null>(null)
     const speedsRef = useRef<number[]>([])
+    const positionsRef = useRef<Float32Array | null>(null)
+    const frameBudgetRef = useRef(0)
 
     useEffect(() => {
         const geometry = pointsRef.current?.geometry
@@ -28,16 +30,23 @@ const Particles = ({ count = 200 }: ParticlesProps) => {
             "position",
             new THREE.BufferAttribute(positions, 3),
         )
+        positionsRef.current = positions
         speedsRef.current = speeds
     }, [count])
 
-    useFrame(() => {
+    useFrame((_, delta) => {
+        // Updating slightly below refresh-rate meaningfully reduces CPU cost
+        // while keeping motion visually smooth.
+        frameBudgetRef.current += delta
+        if (frameBudgetRef.current < 1 / 45) return
+        frameBudgetRef.current = 0
+
         const positionAttribute =
             pointsRef.current?.geometry.getAttribute("position")
         if (!(positionAttribute instanceof THREE.BufferAttribute)) return
 
-        const positions = positionAttribute.array
-        if (!(positions instanceof Float32Array)) return
+        const positions = positionsRef.current
+        if (!positions) return
 
         for (let index = 0; index < count; index++) {
             let y = positions[index * 3 + 1]
