@@ -371,6 +371,46 @@ section {
         }
     }
 
+    .feature-cards-section {
+        @apply py-12 md:py-16;
+        position: relative;
+        overflow: hidden;
+        isolation: isolate;
+
+        &::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(
+                    to bottom,
+                    #000 0%,
+                    rgba(0, 0, 0, 0) 18%,
+                    rgba(0, 0, 0, 0) 82%,
+                    #000 100%
+                ),
+                linear-gradient(
+                    to right,
+                    #000 0%,
+                    rgba(0, 0, 0, 0) 14%,
+                    rgba(0, 0, 0, 0) 86%,
+                    #000 100%
+                ),
+                url("/images/zigzag-lines-pattern-black-background.avif");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.3;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        > .mx-auto {
+            position: relative;
+            z-index: 1;
+        }
+    }
+
     .cta-wrapper {
         @apply relative z-20 cursor-pointer;
     }
