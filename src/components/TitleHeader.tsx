@@ -6,7 +6,7 @@ const TitleHeader = ({
     subtitle: string
 }) => {
     return (
-        <div className="flex flex-col-item-center gap-5">
+        <div className="flex flex-col items-center gap-5">
             <div className="hero-badge">
                 <p>{subtitle}</p>
             </div>
