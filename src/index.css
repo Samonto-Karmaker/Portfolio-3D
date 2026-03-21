@@ -109,15 +109,7 @@ section {
     }
 
     .navbar {
-        @apply fixed w-full left-1/2 py-7 px-5 md:px-20 -translate-x-1/2 z-[100] transition-all duration-300 ease-in-out;
-
-        &.scrolled {
-            @apply top-0 bg-black;
-        }
-
-        &.not-scrolled {
-            @apply top-0 bg-transparent;
-        }
+        @apply fixed top-0 w-full left-1/2 py-7 px-5 md:px-20 -translate-x-1/2 z-[100] bg-black border-b border-white/10;
 
         .inner {
             @apply mx-auto flex items-center justify-between;

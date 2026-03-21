@@ -3,57 +3,18 @@ import { navLinks } from "../consts/constant"
 import MobileSidebar from "./MobileSidebar"
 
 const NavBar = () => {
-    // Direct ref avoids React state updates on every scroll tick.
     const navbarRef = useRef<HTMLElement | null>(null)
     const sidebarRef = useRef<HTMLElement | null>(null)
     const [isSidebarOpen, setIsSidebarOpen] = useState(false)
 
-    useEffect(() => {
-        const navbar = navbarRef.current
-        if (!navbar) return
-
-        // rAF throttles class updates to once per animation frame.
-        let ticking = false
-        // Prevent unnecessary DOM writes while scrolling.
-        let lastIsScrolled: boolean | null = null
-
-        const syncNavbarState = (isScrolled: boolean) => {
-            if (lastIsScrolled === isScrolled) return
-
-            lastIsScrolled = isScrolled
-            // Toggle visual state classes without triggering component rerenders.
-            navbar.classList.toggle("scrolled", isScrolled)
-            navbar.classList.toggle("not-scrolled", !isScrolled)
-            // Explicitly sync background as a safety net for class desync edge cases.
-            navbar.style.backgroundColor = isScrolled ? "#000" : "transparent"
-        }
-
-        const handleScroll = () => {
-            if (ticking) return
-
-            ticking = true
-            requestAnimationFrame(() => {
-                // Flip to scrolled styling as soon as user moves beyond 5px.
-                syncNavbarState(window.scrollY > 5)
-                ticking = false
-            })
-        }
-
-        // Set correct initial state for refreshes or deep links.
-        syncNavbarState(window.scrollY > 5)
-        // Passive listener keeps scrolling smooth.
-        window.addEventListener("scroll", handleScroll, { passive: true })
-
-        return () => {
-            window.removeEventListener("scroll", handleScroll)
-        }
-    }, [])
-
+    // useEffect runs after mount so refs are available.
+    // We measure navbar height and expose it as a CSS variable for mobile sidebar spacing.
     useEffect(() => {
         const navbar = navbarRef.current
         const sidebar = sidebarRef.current
         if (!navbar || !sidebar) return
 
+        // Keep sidebar top offset in sync with current navbar height.
         const syncSidebarOffset = () => {
             sidebar.style.setProperty(
                 "--navbar-offset",
@@ -67,6 +28,7 @@ const NavBar = () => {
         const resizeObserver = new ResizeObserver(syncSidebarOffset)
         resizeObserver.observe(navbar)
 
+        // Cleanup listeners/observer to avoid leaks when component unmounts.
         return () => {
             window.removeEventListener("resize", syncSidebarOffset)
             resizeObserver.disconnect()
@@ -76,7 +38,7 @@ const NavBar = () => {
     return (
         <>
             {/* Header */}
-            <header ref={navbarRef} className="navbar not-scrolled">
+            <header ref={navbarRef} className="navbar">
                 <div className="inner">
                     {/* Left Section: Hamburger + Title */}
                     <div className="flex items-center gap-4">
