@@ -262,8 +262,6 @@ const showcaseProjects = [
         imgPath: "/images/project1.png",
         imgAlt: "Ryde App Interface",
         imageBackground: "#101218",
-        imageScale: 1,
-        cardScale: 1,
         isFeatured: true,
     },
     {
@@ -274,8 +272,6 @@ const showcaseProjects = [
         imgPath: "/images/project2.png",
         imgAlt: "Library Management Platform",
         imageBackground: "#FFEFDB",
-        imageScale: 1,
-        cardScaleRange: [0.97, 1.03],
     },
     {
         id: "yc-directory",
@@ -285,8 +281,6 @@ const showcaseProjects = [
         imgPath: "/images/project3.png",
         imgAlt: "YC Directory App",
         imageBackground: "#FFE7EB",
-        imageScale: 1,
-        cardScaleRange: [0.95, 1.02],
     },
 ]
 
