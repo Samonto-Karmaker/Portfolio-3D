@@ -499,21 +499,33 @@ section {
     }
 
     .footer {
-        @apply my-10 md:mt-20 mt-10 text-white-50 px-5 md:px-20 xl:px-20 flex items-center justify-center;
+        @apply relative my-10 md:mt-20 mt-10 text-white-50 px-5 md:px-20 xl:px-20 py-8 md:py-10 flex flex-col;
+        border-top: 1px solid rgba(255, 255, 255, 0.12);
+        background:
+            linear-gradient(
+                180deg,
+                rgba(255, 255, 255, 0.05) 0%,
+                rgba(255, 255, 255, 0) 100%
+            ),
+            radial-gradient(
+                circle at 10% 0%,
+                rgba(131, 156, 181, 0.22) 0%,
+                rgba(131, 156, 181, 0) 34%
+            );
 
         .footer-container {
-            @apply grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-0 w-full;
+            @apply grid grid-cols-1 md:grid-cols-3 gap-7 md:gap-6 w-full items-center;
         }
 
         p {
-            @apply text-center md:text-start cursor-pointer;
+            @apply text-center md:text-start;
         }
 
         .socials {
             @apply flex items-center justify-center gap-5;
 
             .icon {
-                @apply border border-black-50 bg-black-100 flex justify-center items-center rounded-xl size-10 md:size-12 cursor-pointer transition-all duration-500 hover:bg-black-50;
+                @apply border border-black-50 bg-black-100/80 flex justify-center items-center rounded-xl size-10 md:size-12 cursor-pointer transition-all duration-300 hover:bg-black-50 hover:-translate-y-0.5;
             }
 
             img {
