@@ -83,7 +83,7 @@ const Hero = () => {
 
                 {/* RIGHT: 3D Model or Visual */}
                 <figure>
-                    <div className="hero-3d-layout" ref={modelContainerRef}>
+                    <div className="hero-3d-layout hover:cursor-grab active:cursor-grabbing" ref={modelContainerRef}>
                         <HeroExperience />
                         <ModelZoomHint targetRef={modelContainerRef} />
                     </div>
