@@ -5,13 +5,23 @@ import { intro, words } from "../consts/constant"
 
 import { useGSAP } from "@gsap/react"
 import gsap from "gsap"
-import { Suspense, lazy, useRef } from "react"
+import { Suspense, lazy, useEffect, useRef, useState } from "react"
 
 const HeroExperience = lazy(() => import("../components/models/HeroExperience"))
 
 const Hero = () => {
     const loopWords = [...words, ...words]
     const modelContainerRef = useRef<HTMLDivElement | null>(null)
+    const [shouldLoadHero3D, setShouldLoadHero3D] = useState(false)
+
+    useEffect(() => {
+        // Delay non-critical 3D work until after initial content is visible.
+        const timeoutId = window.setTimeout(() => {
+            setShouldLoadHero3D(true)
+        }, 1200)
+
+        return () => window.clearTimeout(timeoutId)
+    }, [])
 
     useGSAP(
         () => {
@@ -83,13 +93,17 @@ const Hero = () => {
                         className="hero-3d-layout hover:cursor-grab active:cursor-grabbing"
                         ref={modelContainerRef}
                     >
-                        <Suspense
-                            fallback={
-                                <div className="h-full w-full bg-black" />
-                            }
-                        >
-                            <HeroExperience />
-                        </Suspense>
+                        {shouldLoadHero3D ? (
+                            <Suspense
+                                fallback={
+                                    <div className="h-full w-full bg-black" />
+                                }
+                            >
+                                <HeroExperience />
+                            </Suspense>
+                        ) : (
+                            <div className="h-full w-full bg-black" />
+                        )}
                         <ModelZoomHint targetRef={modelContainerRef} />
                     </div>
                 </figure>
