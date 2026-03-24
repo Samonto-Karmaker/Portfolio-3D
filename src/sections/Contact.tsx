@@ -13,7 +13,9 @@ const Contact = () => {
         message: "",
     })
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const handleChange = (
+        e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    ) => {
         const { name, value } = e.target
         setForm({ ...form, [name]: value })
     }
@@ -46,18 +48,18 @@ const Contact = () => {
 
     return (
         <section id="contact" className="flex-center section-padding">
-            <div className="w-full h-full md:px-10 px-5">
+            <div className="w-full h-full md:px-10 px-0">
                 <TitleHeader
                     title="Get in Touch – Let’s Connect"
                     subtitle="💬 Have questions or ideas? Let’s talk! 🚀"
                 />
-                <div className="grid-12-cols mt-16">
+                <div className="grid-12-cols mt-10 md:mt-16">
                     <div className="xl:col-span-5">
-                        <div className="flex-center card-border rounded-xl p-10">
+                        <div className="flex-center card-border rounded-xl p-4 sm:p-6 md:p-10">
                             <form
                                 ref={formRef}
                                 onSubmit={handleSubmit}
-                                className="w-full flex flex-col gap-7"
+                                className="w-full flex flex-col gap-5 md:gap-7"
                             >
                                 <div>
                                     <label htmlFor="name">Your name</label>
@@ -100,7 +102,7 @@ const Contact = () => {
                                     />
                                 </div>
 
-                                <button type="submit">
+                                <button type="submit" className="w-full">
                                     <div className="cta-button group">
                                         <div className="bg-circle" />
                                         <p className="text">

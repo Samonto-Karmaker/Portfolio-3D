@@ -414,7 +414,7 @@ section {
     }
 
     .cta-button {
-        @apply px-4 py-4 rounded-lg bg-black-200 flex justify-center items-center relative cursor-pointer overflow-hidden;
+        @apply w-full min-w-0 px-4 py-4 rounded-lg bg-black-200 flex justify-center items-center relative cursor-pointer overflow-hidden;
 
         .bg-circle {
             @apply absolute -right-10 origin-center top-1/2 -translate-y-1/2 
@@ -423,12 +423,12 @@ section {
         }
 
         .text {
-            @apply uppercase md:text-lg text-black transition-all duration-500
-        group-hover:text-white-50 group-hover:-translate-x-5 xl:translate-x-0 -translate-x-5;
+            @apply uppercase md:text-lg text-black text-center pr-10 md:pr-16 transition-all duration-500
+        group-hover:text-white-50 translate-x-0 md:-translate-x-5 xl:translate-x-0 group-hover:md:-translate-x-5;
         }
 
         .arrow-wrapper {
-            @apply group-hover:bg-white-50 size-10 rounded-full absolute right-10 top-1/2 
+            @apply group-hover:bg-white-50 size-8 md:size-10 rounded-full absolute right-4 md:right-8 xl:right-10 top-1/2 
         -translate-y-1/2 flex justify-center items-center overflow-hidden;
 
             img {
