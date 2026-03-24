@@ -12,6 +12,14 @@ const Contact = () => {
     const modelContainerRef = useRef<HTMLDivElement | null>(null)
     const [loading, setLoading] = useState(false)
     const [shouldRenderModel, setShouldRenderModel] = useState(false)
+    // Tracks a successful GLTF render callback from the 3D component.
+    const [modelLoaded, setModelLoaded] = useState(false)
+    // Manual fallback UI is shown only after automatic recovery fails.
+    const [showModelRetry, setShowModelRetry] = useState(false)
+    // One silent remount is attempted before showing retry controls.
+    const [autoRetryAttempted, setAutoRetryAttempted] = useState(false)
+    // Changing key forces a full remount of lazy 3D subtree.
+    const [modelInstanceKey, setModelInstanceKey] = useState(0)
     const [form, setForm] = useState({
         name: "",
         email: "",
@@ -39,6 +47,33 @@ const Contact = () => {
 
         return () => observer.disconnect()
     }, [shouldRenderModel])
+
+    useEffect(() => {
+        if (!shouldRenderModel || modelLoaded) return
+
+        setShowModelRetry(false)
+        const retryTimer = window.setTimeout(() => {
+            // First stall triggers an automatic remount to recover transient load issues.
+            if (!autoRetryAttempted) {
+                setAutoRetryAttempted(true)
+                setModelLoaded(false)
+                setModelInstanceKey((prev) => prev + 1)
+                return
+            }
+
+            // If a second attempt still stalls, expose a manual retry button.
+            setShowModelRetry(true)
+        }, 8000)
+
+        return () => window.clearTimeout(retryTimer)
+    }, [shouldRenderModel, modelLoaded, autoRetryAttempted, modelInstanceKey])
+
+    const handleModelRetry = () => {
+        // Manual remount path used only after the automatic retry has already run.
+        setModelLoaded(false)
+        setShowModelRetry(false)
+        setModelInstanceKey((prev) => prev + 1)
+    }
 
     const handleChange = (
         e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -150,7 +185,7 @@ const Contact = () => {
                     </div>
                     <div className="xl:col-span-7 min-h-96">
                         <div
-                            className="bg-[#cd7c2e] w-full h-full hover:cursor-grab active:cursor-grabbing rounded-3xl overflow-hidden"
+                            className="relative bg-[#cd7c2e] w-full h-full hover:cursor-grab active:cursor-grabbing rounded-3xl overflow-hidden"
                             ref={modelContainerRef}
                         >
                             {shouldRenderModel ? (
@@ -159,11 +194,31 @@ const Contact = () => {
                                         <div className="h-full w-full bg-[#cd7c2e]" />
                                     }
                                 >
-                                    <ContactExperience />
+                                    <ContactExperience
+                                        key={modelInstanceKey}
+                                        onModelReady={() => {
+                                            setModelLoaded(true)
+                                            setShowModelRetry(false)
+                                        }}
+                                    />
                                 </Suspense>
                             ) : (
                                 <div className="h-full w-full bg-[#cd7c2e]" />
                             )}
+
+                            {shouldRenderModel &&
+                            showModelRetry &&
+                            !modelLoaded ? (
+                                <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
+                                    <button
+                                        type="button"
+                                        onClick={handleModelRetry}
+                                        className="pointer-events-auto rounded-md bg-black/60 px-4 py-2 text-sm text-white hover:bg-black/70"
+                                    >
+                                        Model taking too long. Retry load
+                                    </button>
+                                </div>
+                            ) : null}
                         </div>
                     </div>
                 </div>

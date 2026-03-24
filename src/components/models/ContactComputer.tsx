@@ -1,4 +1,5 @@
 import { useGLTF } from "@react-three/drei"
+import { useEffect } from "react"
 import type { ThreeElements } from "@react-three/fiber"
 import type { Mesh, Material } from "three"
 import type { GLTF } from "three-stdlib"
@@ -14,10 +15,19 @@ type GLTFResult = GLTF & {
     }
 }
 
-export function Computer(props: ThreeElements["group"]) {
+type ComputerProps = ThreeElements["group"] & {
+    onLoaded?: () => void
+}
+
+export function Computer({ onLoaded, ...props }: ComputerProps) {
     const { nodes, materials } = useGLTF(
         "/models/computer-optimized-transformed.glb",
     ) as unknown as GLTFResult
+
+    useEffect(() => {
+        // Notify parent that GLTF nodes/materials resolved and scene can be marked ready.
+        onLoaded?.()
+    }, [onLoaded])
 
     return (
         <group {...props} dispose={null}>
