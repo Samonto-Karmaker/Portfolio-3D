@@ -4,25 +4,26 @@ import type { ThreeElements } from "@react-three/fiber"
 import { EffectComposer, SelectiveBloom } from "@react-three/postprocessing"
 import { BlendFunction } from "postprocessing"
 import type { GLTF } from "three-stdlib"
-import * as THREE from "three"
+import type { Object3D, Material } from "three"
+import { Mesh, MeshPhongMaterial, MeshStandardMaterial } from "three"
 
 type RoomProps = ThreeElements["group"]
 
 type RoomGLTF = GLTF & {
-    nodes: Record<string, THREE.Object3D>
-    materials: Record<string, THREE.Material>
+    nodes: Record<string, Object3D>
+    materials: Record<string, Material>
 }
 
 export function Room(props: RoomProps) {
     const { nodes, materials } = useGLTF(
         "/models/optimized-room.glb",
     ) as unknown as RoomGLTF
-    const screensRef = useRef<THREE.Mesh>(null!)
+    const screensRef = useRef<Mesh>(null!)
     const matcapTexture = useTexture("/images/textures/mat1.png")
 
     const getGeometry = (nodeName: string) => {
         const node = nodes[nodeName]
-        if (!(node instanceof THREE.Mesh)) {
+        if (!(node instanceof Mesh)) {
             throw new Error(`Expected ${nodeName} to be a mesh`)
         }
 
@@ -31,7 +32,7 @@ export function Room(props: RoomProps) {
 
     const curtainMaterial = useMemo(
         () =>
-            new THREE.MeshPhongMaterial({
+            new MeshPhongMaterial({
                 color: "#d90429",
             }),
         [],
@@ -39,7 +40,7 @@ export function Room(props: RoomProps) {
 
     const bodyMaterial = useMemo(
         () =>
-            new THREE.MeshPhongMaterial({
+            new MeshPhongMaterial({
                 map: matcapTexture,
             }),
         [matcapTexture],
@@ -47,7 +48,7 @@ export function Room(props: RoomProps) {
 
     const tableMaterial = useMemo(
         () =>
-            new THREE.MeshPhongMaterial({
+            new MeshPhongMaterial({
                 color: "#582f0e",
             }),
         [],
@@ -55,7 +56,7 @@ export function Room(props: RoomProps) {
 
     const radiatorMaterial = useMemo(
         () =>
-            new THREE.MeshPhongMaterial({
+            new MeshPhongMaterial({
                 color: "#fff",
             }),
         [],
@@ -63,7 +64,7 @@ export function Room(props: RoomProps) {
 
     const compMaterial = useMemo(
         () =>
-            new THREE.MeshStandardMaterial({
+            new MeshStandardMaterial({
                 color: "#fff",
             }),
         [],
@@ -71,7 +72,7 @@ export function Room(props: RoomProps) {
 
     const pillowMaterial = useMemo(
         () =>
-            new THREE.MeshPhongMaterial({
+            new MeshPhongMaterial({
                 color: "#8338ec",
             }),
         [],
@@ -79,7 +80,7 @@ export function Room(props: RoomProps) {
 
     const chairMaterial = useMemo(
         () =>
-            new THREE.MeshPhongMaterial({
+            new MeshPhongMaterial({
                 color: "#000",
             }),
         [],

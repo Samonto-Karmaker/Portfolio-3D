@@ -1,9 +1,9 @@
-import * as THREE from "three"
+import { RectAreaLight } from "three"
 import { memo, useMemo } from "react"
 
 const HeroLights = () => {
     const rectAreaLight = useMemo(
-        () => new THREE.RectAreaLight("#a259ff", 8, 3, 2),
+        () => new RectAreaLight("#a259ff", 8, 3, 2),
         [],
     )
 

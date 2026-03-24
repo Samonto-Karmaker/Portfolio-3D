@@ -18,7 +18,7 @@ const Hero = () => {
         // Delay non-critical 3D work until after initial content is visible.
         const timeoutId = window.setTimeout(() => {
             setShouldLoadHero3D(true)
-        }, 1200)
+        }, 500)
 
         return () => window.clearTimeout(timeoutId)
     }, [])
