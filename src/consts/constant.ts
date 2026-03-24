@@ -18,10 +18,10 @@ const navLinks = [
 ]
 
 const words = [
-    { text: "Ideas", imgPath: "/images/ideas.svg" },
-    { text: "Drafts", imgPath: "/images/concepts.svg" },
-    { text: "Designs", imgPath: "/images/designs.svg" },
-    { text: "Code", imgPath: "/images/code.svg" },
+    { text: "Backend", imgPath: "/images/ideas.svg" },
+    { text: "Scalable", imgPath: "/images/concepts.svg" },
+    { text: "Blockchain", imgPath: "/images/designs.svg" },
+    { text: "Cryptographic", imgPath: "/images/code.svg" },
 ]
 
 const counterItems = [
@@ -285,7 +285,8 @@ const showcaseProjects = [
 ]
 
 const intro =
-    "Hi, I'm Sam, a software engineer with a passion for creating innovative solutions."
+    "Software engineer focused on scalable architectures, blockchain systems, and applied cryptography"
+
 export {
     words,
     abilities,
