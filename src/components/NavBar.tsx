@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react"
+import { useLayoutEffect, useRef, useState } from "react"
 import { navLinks } from "../consts/constant"
 import MobileSidebar from "./MobileSidebar"
 
@@ -7,19 +7,23 @@ const NavBar = () => {
     const sidebarRef = useRef<HTMLElement | null>(null)
     const [isSidebarOpen, setIsSidebarOpen] = useState(false)
 
-    // useEffect runs after mount so refs are available.
+    // useLayoutEffect runs before paint so layout offset CSS vars are ready immediately.
     // We measure navbar height and expose it as a CSS variable for mobile sidebar spacing.
-    useEffect(() => {
+    useLayoutEffect(() => {
         const navbar = navbarRef.current
         const sidebar = sidebarRef.current
-        if (!navbar || !sidebar) return
+        if (!navbar) return
 
         // Keep sidebar top offset in sync with current navbar height.
         const syncSidebarOffset = () => {
-            sidebar.style.setProperty(
+            const navbarHeight = `${navbar.offsetHeight}px`
+
+            document.documentElement.style.setProperty(
                 "--navbar-offset",
-                `${navbar.offsetHeight}px`,
+                navbarHeight,
             )
+
+            sidebar?.style.setProperty("--navbar-offset", navbarHeight)
         }
 
         syncSidebarOffset()
