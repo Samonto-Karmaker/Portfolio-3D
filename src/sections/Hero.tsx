@@ -1,12 +1,13 @@
 import AnimatedCounter from "../components/AnimatedCounter.tsx"
 import ButtonCTA from "../components/ButtonCTA.tsx"
-import HeroExperience from "../components/models/HeroExperience"
 import ModelZoomHint from "../components/ModelZoomHint.tsx"
 import { intro, words } from "../consts/constant"
 
 import { useGSAP } from "@gsap/react"
 import gsap from "gsap"
-import { useRef } from "react"
+import { Suspense, lazy, useRef } from "react"
+
+const HeroExperience = lazy(() => import("../components/models/HeroExperience"))
 
 const Hero = () => {
     const loopWords = [...words, ...words]
@@ -82,7 +83,13 @@ const Hero = () => {
                         className="hero-3d-layout hover:cursor-grab active:cursor-grabbing"
                         ref={modelContainerRef}
                     >
-                        <HeroExperience />
+                        <Suspense
+                            fallback={
+                                <div className="h-full w-full bg-black" />
+                            }
+                        >
+                            <HeroExperience />
+                        </Suspense>
                         <ModelZoomHint targetRef={modelContainerRef} />
                     </div>
                 </figure>

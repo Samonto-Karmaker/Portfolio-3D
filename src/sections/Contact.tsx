@@ -1,17 +1,44 @@
-import { useRef, useState } from "react"
+import { Suspense, lazy, useEffect, useRef, useState } from "react"
 import emailjs from "@emailjs/browser"
 
 import TitleHeader from "../components/TitleHeader"
-import ContactExperience from "../components/models/ContactExperience"
+
+const ContactExperience = lazy(
+    () => import("../components/models/ContactExperience"),
+)
 
 const Contact = () => {
     const formRef: React.RefObject<HTMLFormElement | null> = useRef(null)
+    const modelContainerRef = useRef<HTMLDivElement | null>(null)
     const [loading, setLoading] = useState(false)
+    const [shouldRenderModel, setShouldRenderModel] = useState(false)
     const [form, setForm] = useState({
         name: "",
         email: "",
         message: "",
     })
+
+    // Observe the model container for intersection
+    // On intersection, set the flag to render the model
+    // Lazy load the 3D model
+    useEffect(() => {
+        const target = modelContainerRef.current
+        if (!target || shouldRenderModel) return
+
+        const observer = new IntersectionObserver(
+            (entries) => {
+                if (entries[0]?.isIntersecting) {
+                    setShouldRenderModel(true)
+                    observer.disconnect()
+                }
+            },
+            { rootMargin: "220px 0px" },
+        )
+
+        observer.observe(target)
+
+        return () => observer.disconnect()
+    }, [shouldRenderModel])
 
     const handleChange = (
         e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -122,8 +149,21 @@ const Contact = () => {
                         </div>
                     </div>
                     <div className="xl:col-span-7 min-h-96">
-                        <div className="bg-[#cd7c2e] w-full h-full hover:cursor-grab active:cursor-grabbing rounded-3xl overflow-hidden">
-                            <ContactExperience />
+                        <div
+                            className="bg-[#cd7c2e] w-full h-full hover:cursor-grab active:cursor-grabbing rounded-3xl overflow-hidden"
+                            ref={modelContainerRef}
+                        >
+                            {shouldRenderModel ? (
+                                <Suspense
+                                    fallback={
+                                        <div className="h-full w-full bg-[#cd7c2e]" />
+                                    }
+                                >
+                                    <ContactExperience />
+                                </Suspense>
+                            ) : (
+                                <div className="h-full w-full bg-[#cd7c2e]" />
+                            )}
                         </div>
                     </div>
                 </div>
