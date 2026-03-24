@@ -442,7 +442,7 @@ section {
     }
 
     .marquee-item {
-        @apply md:w-40 w-32;
+        @apply w-auto;
     }
 
     .timeline-wrapper {
@@ -652,21 +652,42 @@ section {
 .marquee-box {
     display: flex;
     align-items: center;
-    width: 200%;
+    width: max-content;
     height: 100%;
-    position: absolute;
-    overflow: hidden;
+    overflow: visible;
+    will-change: transform;
+    --marquee-gap: 1.25rem;
     animation: marquee 60s linear infinite;
 }
+
+.marquee-group {
+    display: flex;
+    align-items: center;
+    gap: var(--marquee-gap);
+    padding-right: var(--marquee-gap);
+}
+
+@media (min-width: 768px) {
+    .marquee-box {
+        --marquee-gap: 3rem;
+    }
+
+    .marquee-group {
+        gap: var(--marquee-gap);
+        padding-right: var(--marquee-gap);
+    }
+}
+
 .marquee-item {
-    float: left;
+    float: none;
+    flex: 0 0 auto;
 }
 @keyframes marquee {
     0% {
-        left: 0;
+        transform: translateX(0);
     }
     100% {
-        left: -100%;
+        transform: translateX(-50%);
     }
 }
 /* marquee end */

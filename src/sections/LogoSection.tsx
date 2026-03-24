@@ -9,14 +9,25 @@ const LogoSection = () => {
             <div className="gradient-edge" />
 
             <div className="marquee h-52">
-                <div className="marquee-box md:gap-12 gap-5">
-                    {logoIconsList.map((icon, index) => (
-                        <LogoIcon key={index} icon={icon} />
-                    ))}
+                <div className="marquee-box">
+                    <div className="marquee-group">
+                        {logoIconsList.map((icon, index) => (
+                            <LogoIcon
+                                key={`primary-${icon}-${index}`}
+                                icon={icon}
+                            />
+                        ))}
+                    </div>
+
                     {/* Render the same list again so the marquee can loop continuously without a visible jump. */}
-                    {logoIconsList.map((icon, index) => (
-                        <LogoIcon key={index} icon={icon} />
-                    ))}
+                    <div className="marquee-group" aria-hidden="true">
+                        {logoIconsList.map((icon, index) => (
+                            <LogoIcon
+                                key={`duplicate-${icon}-${index}`}
+                                icon={icon}
+                            />
+                        ))}
+                    </div>
                 </div>
             </div>
         </section>
