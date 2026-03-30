@@ -73,22 +73,27 @@ const techStackImgs = [
     {
         name: "Frontend",
         imgPath: "/images/logos/react.png",
+        tech: ["React", "Next.js", "Tailwind CSS"],
     },
     {
         name: "Backend",
         imgPath: "/images/logos/node.png",
+        tech: ["Node.js", "Express", "NestJS"],
     },
     {
         name: "Python",
         imgPath: "/images/logos/python.svg",
+        tech: ["Django"],
     },
     {
         name: "Database",
         imgPath: "/images/logos/database.png",
+        tech: ["PostgreSQL", "MongoDB"],
     },
     {
         name: "Blockchain",
         imgPath: "/images/logos/ethereum.webp",
+        tech: ["Ethereum", "Solidity", "Hardhat"],
     },
 ]
 
