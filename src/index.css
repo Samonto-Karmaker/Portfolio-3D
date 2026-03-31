@@ -769,3 +769,7 @@ section {
 .card:hover::before {
     opacity: 1;
 }
+
+.blob-shape {
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+}

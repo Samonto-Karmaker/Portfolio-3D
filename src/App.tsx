@@ -1,4 +1,5 @@
 import NavBar from "./components/NavBar"
+import About from "./sections/About"
 import Contact from "./sections/Contact"
 import Experience from "./sections/Experience"
 import FeatureCards from "./sections/FeatureCards"
@@ -14,6 +15,7 @@ const App = () => {
         <>
             <NavBar />
             <Hero />
+            <About />
             <Showcase />
             <LogoSection />
             <FeatureCards />

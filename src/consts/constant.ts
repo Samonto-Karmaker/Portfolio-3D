@@ -1,5 +1,9 @@
 const navLinks = [
     {
+        name: "About",
+        link: "#about",
+    },
+    {
         name: "Work",
         link: "#work",
     },
@@ -276,6 +280,12 @@ const showcaseProjects = [
 const intro =
     "Software engineer focused on scalable architectures, blockchain systems, and applied cryptography"
 
+const aboutData = {
+    name: "Samanta Karmaker",
+    description: "I am a passionate software engineer focused on building scalable systems, blockchain technologies, and applied cryptography. I thrive on solving complex problems and creating architectures for real-world applications that have a lasting impact.",
+    imgPath: "/images/person.jpg",
+}
+
 export {
     words,
     abilities,
@@ -289,5 +299,6 @@ export {
     techStackImgs,
     navLinks,
     intro,
+    aboutData,
     showcaseProjects,
 }
