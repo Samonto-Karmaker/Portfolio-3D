@@ -282,7 +282,9 @@ const intro =
 
 const aboutData = {
     name: "Samanta Karmaker",
-    description: "I am a passionate software engineer focused on building scalable systems, blockchain technologies, and applied cryptography. I thrive on solving complex problems and creating architectures for real-world applications that have a lasting impact.",
+    description: `I’m a software engineer with a strong focus on backend systems, where I work on designing architectures that handle real-world complexity and scale efficiently. My experience spans microservices, system design, and blockchain-based solutions. 
+    Recently, my work has been moving toward applied cryptography, where I explore problems around efficient verification, data integrity, and zero-knowledge systems. I’m particularly interested in building systems that are not only scalable, but also provably correct and verifiable. 
+    I aim to grow toward research-driven engineering, combining practical system design with deeper cryptographic reasoning to build the next generation of reliable and secure infrastructure.`,
     imgPath: "/images/person.jpg",
 }
 
