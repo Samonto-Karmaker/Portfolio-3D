@@ -277,6 +277,93 @@ const showcaseProjects = [
     },
 ]
 
+const projectDetails = [
+    {
+        id: "ryde",
+        title: "Ryde — On-Demand Ride Sharing App",
+        description:
+            "Ryde is a fully functional ride-sharing mobile application that connects drivers and passengers in real time. It features live GPS tracking, in-app payments, ride history, and dynamic fare estimation — all wrapped in a sleek, intuitive interface optimised for both iOS and Android.",
+        images: [
+            "/images/project1.png",
+            "/images/project2.png",
+        ],
+        contributions: [
+            "Architected the full React Native application from scratch using Expo, ensuring cross-platform compatibility.",
+            "Integrated Stripe payment gateway for secure in-app payments and ride billing.",
+            "Built real-time location tracking with Google Maps SDK and WebSocket-based driver-rider sync.",
+            "Designed and implemented the fare estimation engine using distance-matrix APIs.",
+            "Established CI/CD pipeline with GitHub Actions for automated testing and deployment to TestFlight.",
+        ],
+        techStack: [
+            "React Native",
+            "Expo",
+            "TypeScript",
+            "TailwindCSS",
+            "Stripe",
+            "Google Maps SDK",
+            "NestJS",
+            "PostgreSQL",
+            "WebSockets",
+            "Docker",
+        ],
+    },
+    {
+        id: "library-platform",
+        title: "Library Management Platform",
+        description:
+            "A comprehensive library management system that streamlines book cataloguing, member registration, borrowing & return workflows, and overdue fine tracking. It provides role-based dashboards for librarians and members, real-time availability checks, and email notification support.",
+        images: [
+            "/images/project2.png",
+            "/images/project3.png",
+        ],
+        contributions: [
+            "Designed normalised PostgreSQL schema supporting complex many-to-many borrowing relationships.",
+            "Built RESTful APIs in NestJS with JWT-based role authentication (Admin / Librarian / Member).",
+            "Implemented automated email reminders for due dates and overdue notices via NodeMailer.",
+            "Created an analytics dashboard displaying borrowing trends, popular titles, and member activity.",
+            "Containerised the full stack with Docker Compose for reproducible local and production environments.",
+        ],
+        techStack: [
+            "Next.js",
+            "TypeScript",
+            "NestJS",
+            "PostgreSQL",
+            "Prisma",
+            "JWT Auth",
+            "NodeMailer",
+            "Docker",
+            "TailwindCSS",
+        ],
+    },
+    {
+        id: "yc-directory",
+        title: "YC Directory — Startup Discovery Platform",
+        description:
+            "YC Directory is a curated discovery platform showcasing Y Combinator alumni startups. Users can explore startup profiles, read founder stories, filter by industry and batch, and bookmark companies of interest. Editors can publish rich markdown articles and manage the content pipeline through an integrated CMS.",
+        images: [
+            "/images/project3.png",
+            "/images/project1.png",
+        ],
+        contributions: [
+            "Built a server-side rendered Next.js application leveraging React Server Components for near-instant load times.",
+            "Integrated Sanity CMS as a headless content backend for startup profiles and editorial articles.",
+            "Implemented full-text search with instant filtering by YC batch, sector, and funding stage.",
+            "Designed a responsive card-based UI with glassmorphism aesthetics and smooth GSAP page transitions.",
+            "Configured Vercel edge deployment with ISR (Incremental Static Regeneration) for fresh data at the edge.",
+        ],
+        techStack: [
+            "Next.js 14",
+            "React Server Components",
+            "TypeScript",
+            "Sanity CMS",
+            "TailwindCSS",
+            "GSAP",
+            "Vercel",
+            "Zod",
+        ],
+    },
+]
+
 const intro =
     "Software engineer focused on scalable architectures, blockchain systems, and applied cryptography"
 
@@ -303,4 +390,5 @@ export {
     intro,
     aboutData,
     showcaseProjects,
+    projectDetails,
 }
